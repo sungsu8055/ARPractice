@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
@@ -7,43 +7,65 @@ using UnityEngine.XR.ARSubsystems;
 public class CarManager : MonoBehaviour
 {
     public GameObject indicator;
+    public GameObject myCar;
 
     ARRaycastManager arManager;
-
+    GameObject placedObject;
 
     void Start()
     {
-        // ¹Ù´Ú ¸é ÀÎ½Ä½Ã ÀÎÆ¼ÄÉÀÌÅÍ È°¼ºÀ» À§ÇØ ºñÈ°¼º ÃÊ±âÈ­
+        // ë°”ë‹¥ ë©´ ì¸ì‹ ì‹œ ì¸í‹°ì¼€ì´í„° í™œì„±ì„ ìœ„í•´ ë¹„í™œì„± ì´ˆê¸°í™”
         indicator.SetActive(false);
-        // arManager¿¡ ARRaycastManager ÄÄÆ÷³ÍÆ® ¿¬°á
+        // arManagerì— ARRaycastManager ì»´í¬ë„ŒíŠ¸ ì—°ê²°
         arManager = GetComponent<ARRaycastManager>();
     }
 
     void Update()
     {
-
+        DetectGround();
+        // ì¸ë””ì¼€ì´í„° í™œì„±í™” ì¤‘ í„°ì¹˜ ì‹œ ìë™ì°¨ ëª¨ë¸ë§ ìƒì„±
+        if(indicator.activeInHierarchy && Input.touchCount > 0)
+        {
+            // ì²«ë²ˆì§¸ í„°ì¹˜ ìƒíƒœë¥¼ ê°€ì ¸ì˜´
+            Touch touch = Input.GetTouch(0);
+            // í„°ì¹˜ê°€ ì‹œì‘ëœ ìƒíƒœì´ë©´ ìë™ì°¨ í”„ë¦¬íŒ¹ì„ ê°€ì ¸ì™€ ì¸ë””ì¼€ì´í„° ìë¦¬ì— ìƒì„±
+            if(touch.phase == TouchPhase.Began)
+            {
+                // ìƒì„±ëœ ì˜¤ë¸Œì íŠ¸ê°€ ì—†ì„ ì‹œ ìë™ì°¨ ìƒì„± í›„ placedObjectì— í• ë‹¹
+                if(placedObject == null)
+                {
+                    placedObject = Instantiate(myCar, indicator.transform.position, indicator.transform.rotation);
+                }
+                else
+                {
+                    placedObject.transform.SetPositionAndRotation(indicator.transform.position, indicator.transform.rotation);
+                }
+            }
+        }
     }
 
-    // ¹Ù´Ú °¨Áö ¹× Ç¥½Ä Ãâ·Â¿ë ÇÔ¼ö
+    // ë°”ë‹¥ ê°ì§€ ë° í‘œì‹ ì¶œë ¥ìš© í•¨ìˆ˜
     void DetectGround()
     {
-        // ½ºÅ©¸°ÀÇ Áß¾Ó ÁöÁ¡À» Ã£´Â´Ù. ½ºÅ©¸° ÀüÃ¼ »çÀÌÁî¸¦ ¹İÀ¸·Î ¸¸µç ¼öÄ¡¸¦ µµÃâ
+        // ìŠ¤í¬ë¦°ì˜ ì¤‘ì•™ ì§€ì ì„ ì°¾ëŠ”ë‹¤. ìŠ¤í¬ë¦° ì „ì²´ ì‚¬ì´ì¦ˆë¥¼ ë°˜ìœ¼ë¡œ ë§Œë“  ìˆ˜ì¹˜ë¥¼ ë„ì¶œ
         Vector2 screenSize = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
-        // ·¹ÀÌ¿¡ ºÎµúÈù ´ë»óÀÇ Á¤º¸¸¦ ÀúÀåÇÒ ¸®½ºÆ® º¯¼ö »ı¼º
+        // ë ˆì´ì— ë¶€ë”ªíŒ ëŒ€ìƒì˜ ì •ë³´ë¥¼ ì €ì¥í•  ë¦¬ìŠ¤íŠ¸ ë³€ìˆ˜ ìƒì„±
         List<ARRaycastHit> hitInfos = new List<ARRaycastHit>();
 
-        // ½ºÅ©¸° Áß¾Ó ÁöÁ¡¿¡¼­ ·¹ÀÌ ¹ß»ç ½Ã Plane Å¸ÀÔ ÃßÀû ´ë»óÀÌ ÀÖÀ¸¸é
+        // ìŠ¤í¬ë¦° ì¤‘ì•™ ì§€ì ì—ì„œ ë ˆì´ ë°œì‚¬ ì‹œ Plane íƒ€ì… ì¶”ì  ëŒ€ìƒì´ ìˆìœ¼ë©´
         if(arManager.Raycast(screenSize, hitInfos, TrackableType.All))
         {
-            // Ç¥½Ä ¿ÀºêÁ§Æ® È°¼º
+            // í‘œì‹ ì˜¤ë¸Œì íŠ¸ í™œì„±
             indicator.SetActive(true);
-            // Ç¥½Ä ¿ÀºêÁ§Æ®ÀÇ À§Ä¡ ¹× È¸Àü°ªÀ» ·¹ÀÌ Ãæµ¹ ÁöÁ¡¿¡ ÀÏÄ¡
+            // í‘œì‹ ì˜¤ë¸Œì íŠ¸ì˜ ìœ„ì¹˜ ë° íšŒì „ê°’ì„ ë ˆì´ ì¶©ëŒ ì§€ì ì— ì¼ì¹˜
             indicator.transform.position = hitInfos[0].pose.position;
             indicator.transform.rotation = hitInfos[0].pose.rotation;
+
+            indicator.transform.position += indicator.transform.up * 0.1f;
         }
         else
         {
-            // ´ë»ó ¾øÀ¸¸é ºñÈ°¼º
+            // ëŒ€ìƒ ì—†ìœ¼ë©´ ë¹„í™œì„±
             indicator.SetActive(false);
         }
     }
