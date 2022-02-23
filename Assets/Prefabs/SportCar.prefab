@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3158086221369704884}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5956813309769290597}
+        m_TargetAssemblyTypeName: CarCtrl, Assembly-CSharp
+        m_MethodName: ChangeColor
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3609222455645044452
 GameObject:
   m_ObjectHideFlags: 0
@@ -3006,7 +3018,7 @@ GameObject:
   - component: {fileID: 3980977533715576120}
   - component: {fileID: 3970984594298555532}
   - component: {fileID: 4011778515261683874}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SportCar20_Body_Col
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4429,6 +4441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3982917653964529798}
   - component: {fileID: 3859988273908949740}
+  - component: {fileID: 5956813309769290597}
   m_Layer: 0
   m_Name: SportCar
   m_TagString: Untagged
@@ -4523,6 +4536,29 @@ LODGroup:
     - renderer: {fileID: 3971371187541545402}
     - renderer: {fileID: 3970035529655599602}
   m_Enabled: 1
+--- !u!114 &5956813309769290597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3985599972045212124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a1408ce9a2c8e043a607d7f64577f36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyObjects:
+  - {fileID: 3985624533514791274}
+  - {fileID: 3984714145213579386}
+  - {fileID: 3985459306245447406}
+  colors:
+  - serializedVersion: 2
+    rgba: 0
+  - serializedVersion: 2
+    rgba: 4279507199
+  - serializedVersion: 2
+    rgba: 4278190080
 --- !u!1 &3985618470219843064
 GameObject:
   m_ObjectHideFlags: 0
@@ -5687,7 +5723,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6218073790414145404}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5956813309769290597}
+        m_TargetAssemblyTypeName: CarCtrl, Assembly-CSharp
+        m_MethodName: ChangeColor
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8755674244558764478
 GameObject:
   m_ObjectHideFlags: 0
@@ -5887,4 +5935,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6084473591776221059}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5956813309769290597}
+        m_TargetAssemblyTypeName: CarCtrl, Assembly-CSharp
+        m_MethodName: ChangeColor
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
