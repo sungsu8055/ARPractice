@@ -76,7 +76,7 @@ public class CarManager : MonoBehaviour
 
             indicator.transform.position += indicator.transform.up * 0.1f;
         }
-        else
+        else 
         {
             // 대상 없으면 비활성
             indicator.SetActive(false);
