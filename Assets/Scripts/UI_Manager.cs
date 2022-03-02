@@ -11,8 +11,10 @@ public class UI_Manager : MonoBehaviour
     public Material[] faceMats;
 
     // 얼굴 인식 마커
-    public Image faceTrackingState;
+    public Text indexText;
 
+    int vertNum = 0;
+    int vertCount = 468;
     void Start()
     {
         
@@ -55,21 +57,17 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
-    /*/
-    public void IsFaceTracking()
+    public void IndexIncrease()
     {
-        foreach (ARFace face in faceManager.trackables)
-        {
-            // face 오브젝트가 얼굴을 인식할 경우
-            if (face.trackingState == TrackingState.Tracking)
-            {
-                faceTrackingState.gameObject.SetActive(true);
-            }
-            else
-            {
-                faceTrackingState.gameObject.SetActive(false);
-            }
-        }
+        // vertnum의 값을 1 증가 시키되, 최대 인덱스 값을 넘지 않음
+        int number = Mathf.Min(++vertNum, vertCount - 1);
+        indexText.text = number.ToString();
     }
-    //*/
+
+    public void IndexDecrease()
+    {
+        // vertnum의 값을 1 감소 시키되, 0 이하로 내려가지 않음
+        int number = Mathf.Max(--vertNum, 0);
+        indexText.text = number.ToString();
+    }
 }
