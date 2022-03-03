@@ -6,11 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/FaceScene.unity
-    guid: 1338aec7a79f8034e9a9435d8a61209a
-  - enabled: 1
-    path: Assets/Scenes/CarScene.unity
-    guid: fae261f02c8dd2645a1493e3eb324327
+    path: Assets/Scenes/MarkerScene.unity
+    guid: 5afbc51a87cac3d4fbc4811c161de2f6
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: a9387ec9be6844c43a5ab138cf415216, type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: e61497bd6f0d02347b00d1ba584d8642, type: 2}
