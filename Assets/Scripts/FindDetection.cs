@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
@@ -20,7 +20,7 @@ public class FindDetection : MonoBehaviour
 
     void Start()
     {
-        // À§Ä¡ Ç¥½Ã¿ë Å¥ºê 3°³¸¦ »ı¼º
+        // ìœ„ì¹˜ í‘œì‹œìš© íë¸Œ 3ê°œë¥¼ ìƒì„±
         for(int i = 0; i < 3; i++)
         {
             GameObject go = Instantiate(smallCube);
@@ -28,11 +28,11 @@ public class FindDetection : MonoBehaviour
             go.SetActive(false);
         }
 
-        // ARFaceManager °¡ ¾ó±¼ ÀÎ½Ä µ¨¸®°ÔÀÌÆ®(facesChanged) ½ÇÇà ½Ã ½ÇÇàÇÒ ÇÔ¼ö ¿¬°á
+        // ARFaceManager ê°€ ì–¼êµ´ ì¸ì‹ ë¸ë¦¬ê²Œì´íŠ¸(facesChanged) ì‹¤í–‰ ì‹œ ì‹¤í–‰í•  í•¨ìˆ˜ ì—°ê²°
         // afm.facesChanged += OnDetectThreePoints;
         afm.facesChanged += OnDetectFaceAll;
 
-        // ARFoundationÀÇ XRFaceSubsystem Å¬·¡½º º¯¼ö¸¦ ARCoreÀÇ ARCoreFaceSubsystem Å¬·¡½º º¯¼ö·Î Ä³½ºÆÃ
+        // ARFoundationì˜ XRFaceSubsystem í´ë˜ìŠ¤ ë³€ìˆ˜ë¥¼ ARCoreì˜ ARCoreFaceSubsystem í´ë˜ìŠ¤ ë³€ìˆ˜ë¡œ ìºìŠ¤íŒ…
         subSys = (ARCoreFaceSubsystem)afm.subsystem;
     }
 
@@ -41,16 +41,16 @@ public class FindDetection : MonoBehaviour
         
     }
 
-    // facesChanged µ¨¸®°ÔÀÌÆ®¿¡ ¿¬°áÇÒ ÇÔ¼ö
+    // facesChanged ë¸ë¦¬ê²Œì´íŠ¸ì— ì—°ê²°í•  í•¨ìˆ˜
     void OnDetectThreePoints(ARFacesChangedEventArgs args)
     {
-        // ÀÎ½Ä Á¤º¸¸¦ ´ã´Â updated, removed ¸®½ºÆ®ÀÇ Å©±â°¡ ÇÑ °³ÀÎ °ÍÀ» È°¿ë °¢ ¸®½ºÆ®ÀÇ Å©±â°¡ ÇÑ °³ ÀÌ»óÀÏ °æ¿ì »óÅÂ¸¦ µµÃâÇÒ ¼ö ÀÖÀ½
-        // ¾ó±¼ ÀÎ½Ä Á¤º¸°¡ °»½ÅµÈ °ÍÀÌ ÀÖ´Ù¸é
+        // ì¸ì‹ ì •ë³´ë¥¼ ë‹´ëŠ” updated, removed ë¦¬ìŠ¤íŠ¸ì˜ í¬ê¸°ê°€ í•œ ê°œì¸ ê²ƒì„ í™œìš© ê° ë¦¬ìŠ¤íŠ¸ì˜ í¬ê¸°ê°€ í•œ ê°œ ì´ìƒì¼ ê²½ìš° ìƒíƒœë¥¼ ë„ì¶œí•  ìˆ˜ ìˆìŒ
+        // ì–¼êµ´ ì¸ì‹ ì •ë³´ê°€ ê°±ì‹ ëœ ê²ƒì´ ìˆë‹¤ë©´
         if (args.updated.Count > 0)
         {
-            // ÀÎ½ÄµÈ ¾ó±¼¿¡¼­ Æ¯Á¤ À§Ä¡°ª °¡Á®¿È
+            // ì¸ì‹ëœ ì–¼êµ´ì—ì„œ íŠ¹ì • ìœ„ì¹˜ê°’ ê°€ì ¸ì˜´
             subSys.GetRegionPoses(args.updated[0].trackableId, Allocator.Persistent, ref regionData);
-            // Æ¯Á¤ À§Ä¡¿¡ ¿ÀºêÁ§Æ® À§Ä¡(0: ÄÚ ³¡, 1: ÀÌ¸¶ ÁÂÃø, 2: ÀÌ¸¶ ¿ìÃø)
+            // íŠ¹ì • ìœ„ì¹˜ì— ì˜¤ë¸Œì íŠ¸ ìœ„ì¹˜(0: ì½” ë, 1: ì´ë§ˆ ì¢Œì¸¡, 2: ì´ë§ˆ ìš°ì¸¡)
             for(int i = 0; i < regionData.Length; i++)
             {
                 faceCubes[i].transform.position = regionData[i].pose.position;
@@ -58,7 +58,7 @@ public class FindDetection : MonoBehaviour
                 faceCubes[i].SetActive(true);
             }
         }
-        // ¾ó±¼ ÀÎ½Ä Á¤º¸°¡ ¾ø°Å³ª ÀÒ°Ô µÇ¸é
+        // ì–¼êµ´ ì¸ì‹ ì •ë³´ê°€ ì—†ê±°ë‚˜ ìƒê²Œ ë˜ë©´
         else if(args.removed.Count > 0)
         {
             for(int i =0; i < regionData.Length; i++)
@@ -72,17 +72,17 @@ public class FindDetection : MonoBehaviour
     {
         if(args.updated.Count > 0)
         {
-            // ÅØ½ºÆ® UIÀÇ ¹®ÀÚ¿­ µ¥ÀÌÅÍ¸¦ Á¤¼öÇü µ¥ÀÌÅÍ·Î º¯È¯
+            // í…ìŠ¤íŠ¸ UIì˜ ë¬¸ìì—´ ë°ì´í„°ë¥¼ ì •ìˆ˜í˜• ë°ì´í„°ë¡œ ë³€í™˜
             int num = int.Parse(vertexIndex.text);
 
-            // ¾ó±¼ ¹öÅØ½º ¹è¿­¿¡¼­ ÁöÁ¤ÇÑ ÀÎµ¦½º¿¡ ÇØ´çÇÏ´Â ÁÂÇ¥¸¦ °¡Á®¿Â´Ù.
+            // ì–¼êµ´ ë²„í…ìŠ¤ ë°°ì—´ì—ì„œ ì§€ì •í•œ ì¸ë±ìŠ¤ì— í•´ë‹¹í•˜ëŠ” ì¢Œí‘œë¥¼ ê°€ì ¸ì˜¨ë‹¤.
             // Vector3 vertPosition = args.updated[0].vertices[100];
             Vector3 vertPosition = args.updated[0].vertices[num];
 
-            // ¹öÅØ½º ÁÂÇ¥¸¦ ¿ùµå ÁÂÇ¥·Î º¯È¯
+            // ë²„í…ìŠ¤ ì¢Œí‘œë¥¼ ì›”ë“œ ì¢Œí‘œë¡œ ë³€í™˜
             vertPosition = args.updated[0].transform.TransformPoint(vertPosition);
 
-            // ÁØºñµÈ Å¥ºê ÇÏ³ª¸¦ È°¼ºÈ­ ÈÄ ¹öÅØ½º À§Ä¡¿¡ °¡Á®´Ù ³õÀ½
+            // ì¤€ë¹„ëœ íë¸Œ í•˜ë‚˜ë¥¼ í™œì„±í™” í›„ ë²„í…ìŠ¤ ìœ„ì¹˜ì— ê°€ì ¸ë‹¤ ë†“ìŒ
             faceCubes[0].SetActive(true);
             faceCubes[0].transform.position = vertPosition;
         }

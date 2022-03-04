@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BallCtrl : MonoBehaviour
 {
     public float resetTime = 3.0f;
+    // 포획 확률 30%
+    public float captureRate = 0.3f;
+    public Text result;
+    public GameObject effect;
 
     Rigidbody rb;
     bool isReady = true;
@@ -12,6 +17,9 @@ public class BallCtrl : MonoBehaviour
 
     void Start()
     {
+        // 포획 결과 텍스트를 공백 상태로 초기화
+        result.text = "";
+
         // 리지드바디 물리 능력 비활성화
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
@@ -75,5 +83,33 @@ public class BallCtrl : MonoBehaviour
         rb.velocity = Vector3.zero;
         // 준비 상태로 변경
         isReady = true;
+
+        gameObject.SetActive(true);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (isReady)
+        {
+            return;
+        }
+
+        // 포획 확률을 추첨
+        float draw = Random.Range(0, 1.0f);
+
+        if(draw <= captureRate)
+        {
+            result.text = "포획 성공!";
+        }
+        else
+        {
+            result.text = "포획에 실패해 도망쳤습니다...";
+        }
+        // 이펙트 생성
+        Instantiate(effect, collision.transform.position, Camera.main.transform.rotation);
+
+        // 고양이 캐릭터를 제거하고 공을 비활성
+        Destroy(collision.gameObject);
+        gameObject.SetActive(false);
     }
 }
